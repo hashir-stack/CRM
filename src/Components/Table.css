@@ -1,0 +1,100 @@
+/* Container */
+.container {
+    margin-top: 40px;
+  }
+   /* create table button */
+   .cre-contact{
+    display: flex;
+    flex-direction: column;
+    /* gap: 40px; */
+    margin-left: 950px;
+    margin-bottom: 20px;
+    color: red;
+   }
+  /* Table Styles */
+  .table {
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+    border-collapse: collapse;
+  }
+   
+  /* Table Header */
+  thead {
+    background-color: #f8f9fa; /* Light grey background for header */
+  }
+   
+  thead th {
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #e9ecef; /* Slightly darker background for headers */
+    padding: 10px;
+  }
+   
+  /* Table Cells */
+  td {
+    vertical-align: middle;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+   
+  /* Row Hover Effect */
+  tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+   
+  /* Contact Owner Dropdown (Simulating dropdown style from image) */
+  td {
+    position: relative;
+  }
+   
+  /* Add icon-like button for visual styling of cells */
+  td:last-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+   
+  /* Icons and Buttons */
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #007bff; /* Bootstrap primary color */
+  }
+   
+  button:focus {
+    outline: none;
+  }
+   
+  /* Align "No owner" text in center of the column */
+  td:last-child {
+    text-align: center;
+  }
+   
+  /* Styling for table columns like "Last Contacted" and "Support Priority" */
+  td:last-child,
+  td:nth-child(6) {
+    text-align: center;
+  }
+   
+  /* Optional: Styling for contact owner dropdown */
+  td:nth-child(5) select {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+   
+  /* Optional: Styling for action buttons (like 'eye' icon) */
+  td:nth-child(1) button,
+  td:nth-child(2) button {
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: #5bc0de; /* Light blue color for icons */
+  }
