@@ -1,42 +1,43 @@
 import { useState } from "react";
 import "./Login.css";
 
-const Login = () => {
-  const [loginDetails, setLoginDetails] = useState({
-    email: "",
-    password: "",
-    role:"Admin"
-  });
-// -----------handle change for the login form-------
-  const handleLoginChange = (e) => {
-    setLoginDetails({
-      ...loginDetails,
-      [e.target.name]: e.target.value,
-    });
-  };
-// --------login form submit---------
-  const handleLoginSubmit = async(e) => {
-    e.preventDefault();
-    console.log(loginDetails);
-    setLoginDetails({
-      email: "",
-      password: "",
-    });
-    await fetch("127.0.0.1:8000/crm/customer/profile/", {
-      method:"POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(loginDetails)
-    })
-  };
+const EmpLogin = () => {
+
+    const [loginDetails, setLoginDetails] = useState({
+        email: "",
+        password: "",
+        role:"employee"
+      });
+    // -----------handle change for the login form-------
+      const handleLoginChange = (e) => {
+        setLoginDetails({
+          ...loginDetails,
+          [e.target.name]: e.target.value,
+        });
+      };
+    // --------login form submit---------
+      const handleLoginSubmit = async(e) => {
+        e.preventDefault();
+        console.log(loginDetails);
+        setLoginDetails({
+          email: "",
+          password: "",
+        });
+        await fetch("127.0.0.1:8000/crm/employee/profile/", {
+          method:"POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(loginDetails)
+        })
+      };
 
   return (
     <>
-      <div className="container">
+        <div className="container">
         <div className="wrapper">
           <div className="title">
-            <span>Welcome back Admin</span>
+            <span>Welcome back Employee</span>
           </div>
           <p className="title_para">Please enter your details to sign in.</p>
 
@@ -76,6 +77,7 @@ const Login = () => {
         </div>
       </div>
     </>
-  );
-};
-export default Login;
+  )
+}
+
+export default EmpLogin

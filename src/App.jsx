@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./Components/Navbar";
 import Table from "./Components/Table";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout/Layout";
@@ -9,16 +8,22 @@ import ContactForm from "./Components/ContactForm";
 import Profile from "./Components/Profile";
 import Login from "./Components/Pages/Login";
 import Unauth from "./Components/Unauth";
+import LandingPage from "./Components/Pages/LandingPage";
+import EmpLogin from "./Components/Pages/EmpLogin";
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout />,
+      element:<Layout />,
       errorElement: <h1>404 Error</h1>,
       children: [
         {
           path: "/",
+          element: <LandingPage />,
+        },
+        {
+          path: "/home",
           element: <Home />,
         },
         {
@@ -30,10 +35,17 @@ const App = () => {
           element: <Table />,
         },
         {
-          path: "/login",
+          path: "/adlogin",
           element: <Login />,
         },
-
+        {
+          path: "/emplogin",
+          element: <EmpLogin/>,
+        },
+        {
+          path: "/custlogin",
+          element: <Login />,
+        },
         {
           path: "/contactform",
           element: <ContactForm />,
