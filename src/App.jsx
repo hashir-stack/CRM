@@ -10,6 +10,7 @@ import Login from "./Components/Pages/Login";
 import Unauth from "./Components/Unauth";
 import LandingPage from "./Components/Pages/LandingPage";
 import EmpLogin from "./Components/Pages/EmpLogin";
+import CustLogin from "./Components/Pages/CustLogin";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -44,7 +45,7 @@ const App = () => {
         },
         {
           path: "/custlogin",
-          element: <Login />,
+          element: <CustLogin />,
         },
         {
           path: "/contactform",
