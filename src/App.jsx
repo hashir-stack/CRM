@@ -11,6 +11,7 @@ import Unauth from "./Components/Unauth";
 import LandingPage from "./Components/Pages/LandingPage";
 import EmpLogin from "./Components/Pages/EmpLogin";
 import CustLogin from "./Components/Pages/CustLogin";
+import Dashboard from "./Components/Pages/Dashboard";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const App = () => {
         {
           path: "/profile",
           element: <Profile />,
+        },
+        {
+          path: "/dashboard",
+          element: <Dashboard/>,
         },
         {
           path: "/contacts",
