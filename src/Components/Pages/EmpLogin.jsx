@@ -1,40 +1,54 @@
 import { useState } from "react";
 import "./Login.css";
-
+import axios from "axios";
 const EmpLogin = () => {
+  const [loginDetails, setLoginDetails] = useState({
+    username: "",
+    password: "",
+    role: "employee",
+  });
+  // -----------handle change for the login form-------
+  const handleLoginChange = async(e) => {
+    setLoginDetails({
+      ...loginDetails,
+      [e.target.name]: e.target.value,
+    });
+  };
+  // --------login form submit---------
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    console.log(loginDetails);
 
-    const [loginDetails, setLoginDetails] = useState({
-        email: "",
-        password: "",
-        role:"employee"
-      });
-    // -----------handle change for the login form-------
-      const handleLoginChange = (e) => {
-        setLoginDetails({
-          ...loginDetails,
-          [e.target.name]: e.target.value,
-        });
-      };
-    // --------login form submit---------
-      const handleLoginSubmit = async(e) => {
-        e.preventDefault();
-        console.log(loginDetails);
-        setLoginDetails({
-          email: "",
-          password: "",
-        });
-        await fetch("127.0.0.1:8000/crm/employee/profile/", {
-          method:"POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(loginDetails)
-        })
-      };
+    try {
+      const employee_res = await axios.post(
+        "http://127.0.0.1:8000/employee/login/",
+        loginDetails
+      );
+
+      // Store tokens in localStorage or cookies
+      // localStorage.setItem("access_token", response.data.access);
+      // localStorage.setItem("refresh_token", response.data.refresh);
+
+      localStorage.setItem(
+        "access_token",
+        JSON.stringify(employee_res.data.access)
+      );
+      localStorage.setItem(
+        "refresh_token",
+        JSON.stringify(employee_res.data.refresh)
+      );
+      navigate("/dashboard");
+      alert("sucessfully logged in...");
+      return employee_res.data;
+    } catch (error) {
+      console.error("Login failed:", error.user_res.data);
+      throw error;
+    }
+  };
 
   return (
     <>
-        <div className="container">
+      <div className="container">
         <div className="wrapper">
           <div className="title">
             <span>Welcome back Employee</span>
@@ -46,11 +60,11 @@ const EmpLogin = () => {
               {/* <i className="fas fa-user"></i> */}
               <input
                 type="text"
-                placeholder="Enter your email..."
+                placeholder="Enter your username..."
                 required
-                value={loginDetails.email}
+                value={loginDetails.username}
                 onChange={handleLoginChange}
-                name="email"
+                name="username"
               />
             </div>
             <div className="row">
@@ -71,13 +85,13 @@ const EmpLogin = () => {
               <input type="submit" value="Login" />
             </div>
             <div className="signup-link">
-              Not a member? <a href="#">Signup now</a>
+              Not a member? <a href="/empsignup">Signup now</a>
             </div>
           </form>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default EmpLogin
+export default EmpLogin;

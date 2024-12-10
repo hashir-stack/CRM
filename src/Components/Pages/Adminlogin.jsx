@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./Login.css";
+import axios from "axios";
 
-const Login = () => {
+const Adminlogin = () => {
   const [loginDetails, setLoginDetails] = useState({
-    email: "",
+    username: "",
     password: "",
-    role:"Admin"
+    role:"admin"
   });
 // -----------handle change for the login form-------
   const handleLoginChange = (e) => {
@@ -18,17 +19,33 @@ const Login = () => {
   const handleLoginSubmit = async(e) => {
     e.preventDefault();
     console.log(loginDetails);
-    setLoginDetails({
-      email: "",
-      password: "",
-    });
-    await fetch("127.0.0.1:8000/crm/customer/profile/", {
-      method:"POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(loginDetails)
-    })
+   
+    try {
+      const admin_res = await axios.post(
+        "http://127.0.0.1:8000/admin/login/",
+        loginDetails
+      );
+
+      // Store tokens in localStorage or cookies
+      // localStorage.setItem("access_token", response.data.access);
+      // localStorage.setItem("refresh_token", response.data.refresh);
+
+      localStorage.setItem(
+        "access_token",
+        JSON.stringify(admin_res.data.access)
+      );
+      localStorage.setItem(
+        "refresh_token",
+        JSON.stringify(admin_res.data.refresh)
+      );
+      navigate("/dashboard");
+      alert("sucessfully logged in...");
+      return user_res.data;
+    } catch (error) {
+      console.error("Login failed:", error.admin_res.data);
+      throw error;
+    }
+   
   };
 
   return (
@@ -45,11 +62,11 @@ const Login = () => {
               {/* <i className="fas fa-user"></i> */}
               <input
                 type="text"
-                placeholder="Enter your email..."
+                placeholder="Enter your username..."
                 required
-                value={loginDetails.email}
+                value={loginDetails.username}
                 onChange={handleLoginChange}
-                name="email"
+                name="username"
               />
             </div>
             <div className="row">
@@ -69,13 +86,10 @@ const Login = () => {
             <div className="row button">
               <input type="submit" value="Login" />
             </div>
-            <div className="signup-link">
-              Not a member? <a href="#">Signup now</a>
-            </div>
           </form>
         </div>
       </div>
     </>
   );
 };
-export default Login;
+export default Adminlogin;
